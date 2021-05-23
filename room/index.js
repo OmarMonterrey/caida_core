@@ -10,14 +10,19 @@ class Room{
 		});
 		return response;
 	}
-	sit(person, key){
+	sit(person, key=false){
 		if(this.partida) return -1;
+		if(key===false) key = this.sitKey();
 		if( this.chairs[ key ].userId )
 			return false;
 		this.chairs[ key ] = person;
 		return true;
 	}
-	addBot(key){
+	sitKey(){
+		let emptyChair = this.chairs.findIndex(x => typeof x.userId === 'undefined');
+		return emptyChair;
+	}
+	addBot(key=false){
 		return this.sit({userId:'B', userName:'BOT'}, key)
 	}
 	kick(key){
