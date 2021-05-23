@@ -16,14 +16,13 @@ class Partida{
 
 		this.gameData = options.gameData ? options.gameData : this.blankData();
 
-		this.waitTime = 1//1000;
-		this.botPlayTime = 1//2000;
-		this.botDealTime = 1//2000;
-		this.countTime = 1//300;
-		this.placeTime = 1//1000;
-		this.pointsNeeded = 5//24;
-
-		this.gameCreated();
+		this.waitTime = 1000;
+		this.botPlayTime = 2000;
+		this.botDealTime = 2000;
+		this.countTime = 300;
+		this.placeTime = 1000;
+		this.pointsNeeded = 24;
+		setTimeout(() =>this.gameCreated(), 100)
 	}
 	blankData(){
 		return {
@@ -94,6 +93,21 @@ class Partida{
 			canTable:this.gameData.canTable
 		};
 		return data;
+	}
+	getCardName(cardId){
+		let value = this.cardValue( cardId );
+		let top = Math.floor(cardId / 10) * 10;
+		let type;
+		switch(top){
+			case 0:type = 'Oro';break;
+			case 10:type = 'Copa';break;
+			case 20:type = 'Espadas';break;
+			case 30:type = 'Bastos';break;
+		}
+		if(value===8) value = 'Sota';
+		if(value===9) value = 'Caballo';
+		if(value===10) value = 'Rey';
+		return `${value} de ${type}`;
 	}
 }
 Object.assign(Partida.prototype, botFunctions);

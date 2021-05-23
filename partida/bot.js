@@ -52,6 +52,7 @@ module.exports = {
 		return this.play(cardToPlay);
 	},
 	checkBotPlay(){
+		console.log('+++++ Check Bot Play');
 		if(this.gameData.status=='dealing' && this.isBot(this.gameData.dealer)){
 			setTimeout(function(){
 				this.table();

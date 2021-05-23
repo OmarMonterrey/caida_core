@@ -83,7 +83,7 @@ module.exports = {
 				case 3:position=9;break;
 			}
 			let Threw = this.placeCard(this.gameData.deck.shift(), position);
-			this.trigger('tableCardPlaced', Threw.id);
+			this.trigger('tableCardPlaced', Threw.id, guess);
 			if(Threw.took){
 				this.trigger('cardRepeated');
 				placed--;
