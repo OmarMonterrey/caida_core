@@ -4,27 +4,25 @@ var playFunctions = require('./play.js');
 var statusFunctions = require('./status.js');
 var hooksFunctions = require('./hooks.js');
 var pointsFunctions = require('./points.js');
-var socketFunctions = require('./socket.js');
 var events = require('./events.js');
 var handFunctions = require('./hand.js');
 class Partida{
-	constructor(options={}, socketIO=false, roomId=0){
+	constructor(options={}){
 		this.blankData = this.blankData.bind(this);
 
-		this.players = options.players ? options.players : this.createBots(options.config.slots);
+		this.players = options.players || this.createBots(options.config.slots);
 		this.checkIfBots();
 		this.config = options.config;
 
 		this.gameData = options.gameData ? options.gameData : this.blankData();
 
-		this.waitTime = 1000;
-		this.botPlayTime = 2000;
-		this.botDealTime = 2000;
-		this.countTime = 300;
+		this.waitTime = 1//1000;
+		this.botPlayTime = 1//2000;
+		this.botDealTime = 1//2000;
+		this.countTime = 1//300;
+		this.placeTime = 1//1000;
+		this.pointsNeeded = 5//24;
 
-		this.roomId = roomId;
-		if(socketIO)
-			this.socketIO =socketIO;
 		this.gameCreated();
 	}
 	blankData(){
@@ -105,6 +103,5 @@ Object.assign(Partida.prototype, statusFunctions);
 Object.assign(Partida.prototype, hooksFunctions);
 Object.assign(Partida.prototype, pointsFunctions);
 Object.assign(Partida.prototype, handFunctions);
-Object.assign(Partida.prototype, socketFunctions);
 Object.assign(Partida.prototype, events);
 module.exports = Partida;

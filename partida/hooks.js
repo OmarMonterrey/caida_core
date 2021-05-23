@@ -1,5 +1,6 @@
 module.exports = {
 	gameCreated: function(){
+		this.trigger("gameCreated");
 		this.checkBotPlay();
 	},
 	gameStarted: function(){
@@ -19,7 +20,7 @@ module.exports = {
 		this.gameData.lastCardPlaced = false;
 		let data = {};
 		data.gameData = this.currentData();
-		this.trigger('dataLoad',data);
+		this.trigger('gameStarted');
 		this.updateHands();
 		this.checkBotPlay();
 	},
@@ -33,10 +34,9 @@ module.exports = {
 		this.trigger('cardPlayed', data);
 	},
 	wonGame: function(index){
-		this.trigger('message',{type:'won',text:this.gameData.players[index].userName+' ganó.'});
-		this.onStatusChange();
+		this.trigger('win', index);
 	},
 	updateHands: function(){
-		this.trigger('dataLoad',{handCount: this.handCount()});
+		this.trigger('handCount', this.handCount());
 	}
 }

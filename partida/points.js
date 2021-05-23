@@ -7,12 +7,13 @@ module.exports = {
 		else{
 			tempPoints = [(this.gameData.points[0]+this.gameData.points[2]),(this.gameData.points[1]+this.gameData.points[3])];
 		}
-		let winnerIndex = tempPoints.findIndex((i)=>{return i>=24});
+		let winnerIndex = tempPoints.findIndex((i)=>{return i>= this.pointsNeeded });
 		if(winnerIndex!==-1){
 			this.gameData.status = 'ended';
 			this.wonGame(winnerIndex);
+		} else {
+			this.trigger('pointCount', this.getPoints());
 		}
-		this.trigger('pointCount', this.getPoints());
 	},
 	cardValue: function(card){
 		return (card + 1) - (Math.floor(card / 10) * 10);

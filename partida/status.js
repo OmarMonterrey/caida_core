@@ -2,7 +2,6 @@ module.exports = {
 	countCards: function(){
 		if(this.gameData.status!=='playing')
 			return false;
-		console.log('COUNT!!');
 		this.gameData.status = 'cardCount';
 		this.gameData.pile[this.gameData.lastTook]+=this.gameData.table.length;
 		this.gameData.table = [];
@@ -28,6 +27,7 @@ module.exports = {
 				}.bind(this),this.countTime);
 			}
 		}.bind(this));
+		this.trigger('cardsCounted');
 	},
 	changeDealer: function(){
 		if(this.gameData.deck.length || this.gameData.status!=='cardCount')
@@ -41,6 +41,6 @@ module.exports = {
 		this.gameData.canTable = true;
 		this.gameData.status = 'dealing';
 		this.checkBotPlay();
-		this.onStatusChange();
+		this.onStatusChange('dealing');
 	}
 }

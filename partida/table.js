@@ -37,7 +37,9 @@ module.exports = {
 			caida:caida,
 			tookCount:tookCount
 		};
-		this.cardPlayed(cardData);
+		if(this.gameData.status === 'playing'){
+			this.cardPlayed(cardData);
+		}
 		return r;
 	},
 	valuesInTable: function(){
@@ -81,9 +83,9 @@ module.exports = {
 				case 3:position=9;break;
 			}
 			let Threw = this.placeCard(this.gameData.deck.shift(), position);
-			console.log('Card placed: ',Threw.id);
+			this.trigger('tableCardPlaced', Threw.id);
 			if(Threw.took){
-				console.log('Repeated!');
+				this.trigger('cardRepeated');
 				placed--;
 				this.gameData.table.pop();
 				this.gameData.deck.push(Threw.id);
@@ -93,7 +95,7 @@ module.exports = {
 					this.addPoints(this.gameData.dealer,guess);
 				}
 			}
-			setTimeout(()=>this.table(first,placed+1),1000);
+			setTimeout(()=>this.table(first,placed+1), this.placeTime);
 		} else {
 			this.gameStarted();
 		}
@@ -113,7 +115,7 @@ module.exports = {
 			this.gameData.hands.some((singleHand) =>{return singleHand.length!==0})
 		)
 			return false;
-		console.log('Cards dealt!');
+		this.trigger('dealt');
 		var cardsToDeal = this.config.slots*3;
 		for(let i=0;i<cardsToDeal;i++){
 			let handIndex = Math.floor(i/3);

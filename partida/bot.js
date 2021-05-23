@@ -11,6 +11,8 @@ module.exports = {
 			'Yo-robot',
 			'Blitzcrank'
 		];
+		if(!this.players)
+			this.players = [];
 		while(true){
 			response = botNames[Math.floor(Math.random() * botNames.length)];
 			inUse = this.players.findIndex(function(singlePlayer){
@@ -50,7 +52,6 @@ module.exports = {
 		return this.play(cardToPlay);
 	},
 	checkBotPlay(){
-		console.log('CHECK BOT PLAY!');
 		if(this.gameData.status=='dealing' && this.isBot(this.gameData.dealer)){
 			setTimeout(function(){
 				this.table();

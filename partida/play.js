@@ -39,7 +39,6 @@ module.exports = {
 		if(r.caida){
 			this.onCaida(this.gameData.turn,(r.value < 8 ? 1 : r.value-6), 'caida');
 		}
-		this.onCardByUser(r.id);
 	},
 	checkCanto: function(userHand=false){
 		if(userHand===false)
