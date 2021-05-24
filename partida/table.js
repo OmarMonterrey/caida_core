@@ -9,7 +9,9 @@ module.exports = {
 			id:card,
 			position:this.tablePosition(forcePos),
 			rotation: 10 - Math.random()*20,
-			value:cardValue
+			value:cardValue,
+			turn: this.gameData.turn,
+			next: (this.gameData.turn+1)===this.gameData.players.length ? 0 : this.gameData.turn+1
 		};
 		if(this.gameData.status==='dealing' || !took){
 			this.gameData.table.push(cardData);
