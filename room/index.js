@@ -49,6 +49,10 @@ class Room{
 		this.partida = false;
 	}
 	start(P, team=false){
+		if(this.partida.status=='ended'){
+			this.partida.stop();
+			this.partida = false;
+		}
 		if(this.partida) return -1;
 		if(this.getPlayers().length < 2) return -1;
 		if(team && this.getPlayers().length < 4) return -1;
