@@ -15,6 +15,7 @@ class Room{
 		if(this.partida) return -1;
 		if(person.userId !== 'B' && this.chairs.findIndex(x => x.userId==person.userId)>=0) return -1;
 		if(key===false) key = this.sitKey();
+		if(key===-1) return -1;
 		if( this.chairs[ key ].userId )
 			return false;
 		this.chairs[ key ] = person;
@@ -43,6 +44,8 @@ class Room{
 		return true;
 	}
 	stop(){
+		if(this.partida)
+			this.partida.stop();
 		this.partida = false;
 	}
 	start(P, team=false){

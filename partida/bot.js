@@ -45,7 +45,7 @@ module.exports = {
 		return r;
 	},
 	autoPlay: function(){
-		if(this.gameData.status!=='playing')
+		if(this.gameData.status!=='playing' || this.stopped)
 			return false;
 		let hand = [...this.gameData.hands[this.gameData.turn]];
 		let cardToPlay = hand.shift();

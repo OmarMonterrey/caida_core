@@ -16,13 +16,17 @@ class Partida{
 
 		this.gameData = options.gameData ? options.gameData : this.blankData();
 
-		this.waitTime = 2000;
-		this.botPlayTime = 5000;
-		this.botDealTime = 5000;
-		this.countTime = 300;
+		this.waitTime = 2500;
+		this.botPlayTime = 7500;
+		this.botDealTime = 7500;
+		this.countTime = 1500;
 		this.placeTime = 1500;
 		this.pointsNeeded = 24;
+		this.stopped = false;
 		setTimeout(() =>this.gameCreated(), 100)
+	}
+	stop(){
+		this.stopped = true;
 	}
 	blankData(){
 		return {
