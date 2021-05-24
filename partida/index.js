@@ -21,7 +21,7 @@ class Partida{
 		this.botDealTime = 7500;
 		this.countTime = 1500;
 		this.placeTime = 1500;
-		this.pointsNeeded = 5;
+		this.pointsNeeded = 24;
 		this.stopped = false;
 		setTimeout(() =>this.gameCreated(), 100)
 	}
