@@ -51,6 +51,7 @@ class Room{
 	start(P, team=false){
 		if(this.partida) return -1;
 		if(this.getPlayers().length < 2) return -1;
+		if(team && this.getPlayers().length < 4) return -1;
 		this.partida = new P({
 			players: this.getPlayers(),
 			config:{
